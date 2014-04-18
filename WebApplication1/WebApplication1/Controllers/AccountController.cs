@@ -310,7 +310,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Roles="Admin")]
         public ActionResult Index()
         {
             var Db = new ApplicationDbContext();
@@ -324,7 +324,7 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles="CanEdit, Admin")]
         public ActionResult Edit(string id, ManageMessageId? Message = null)
         {
             var Db = new ApplicationDbContext();
@@ -335,7 +335,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "CanEdit, Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EditUserViewModel model)
         {
@@ -355,7 +355,7 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+         [Authorize(Roles = "Admin")]
         public ActionResult Delete(string id = null)
         {
             var Db = new ApplicationDbContext();
@@ -370,7 +370,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(string id)
         {
             var Db = new ApplicationDbContext();
@@ -380,7 +380,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles="Admin")]
         public ActionResult UserRoles(string id)
         {
             var Db = new ApplicationDbContext();
@@ -390,7 +390,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult UserRoles(SelectUserRolesViewModel model)
         {
@@ -412,6 +412,8 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+       
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && UserManager != null)
@@ -421,6 +423,8 @@ namespace WebApplication1.Controllers
             }
             base.Dispose(disposing);
         }
+
+       
 
         #region Вспомогательные приложения
         // Used for XSRF protection when adding external logins
@@ -505,7 +509,9 @@ namespace WebApplication1.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
-        }
+        }       
+
         #endregion
     }
+         
 }

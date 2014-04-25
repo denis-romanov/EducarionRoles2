@@ -6,7 +6,8 @@
 <h2>Index</h2>
 @using (Html.BeginForm("Index","RaspManage"))
 {
-    @Html.ListBoxFor(m => m.SelectedYear, new SelectList(Model.YearList, Model.YearList.SelectedValue), new { @Id="Год"})
+    @*@Html.ListBoxFor(m => m.SelectedYear, new SelectList(Model.YearList, Model.YearList.SelectedValue), new { @Id="Год"})*@
+    @Html.DropDownListFor(M => M.SelectedYear, new SelectList(Model.YearList, "Value", "Text", Model.YearList.SelectedValue) )
     <br/><input type="submit" value="Подтвердить" title="submit"/>
     <div>@ViewBag.Year</div>
 }

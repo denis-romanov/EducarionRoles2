@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
 
             }
 
-            SelectList objSelectList = new SelectList(objYear);
+            SelectList objSelectList = new SelectList(objYear, "y", "y");
             return objSelectList;
         }
                

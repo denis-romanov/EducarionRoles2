@@ -1,0 +1,12 @@
+﻿@model WebApplication1.Models.RaspViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index","RaspManage"))
+{
+    @Html.ListBoxFor(m => m.SelectedYear, new SelectList(Model.YearList, Model.YearList.SelectedValue), new { @Id="Год"})
+    <br/><input type="submit" value="Подтвердить" title="submit"/>
+    <div>@ViewBag.Year</div>
+}

@@ -8,6 +8,8 @@
 {
     @*@Html.ListBoxFor(m => m.SelectedYear, new SelectList(Model.YearList, Model.YearList.SelectedValue), new { @Id="Год"})*@
     @Html.DropDownListFor(M => M.SelectedYear, new SelectList(Model.YearList, "Value", "Text", Model.YearList.SelectedValue) )
+    @Html.DropDownListFor(M => M.SelectedSem, new SelectList(Model.SemsList, "Value", "Text", Model.SemsList.SelectedValue) )
     <br/><input type="submit" value="Подтвердить" title="submit"/>
     <div>@ViewBag.Year</div>
+    <div>@ViewBag.Sem</div>
 }

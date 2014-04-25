@@ -11,9 +11,16 @@ namespace WebApplication1.Models
     {
         public SelectList YearList { get; set; }
         public string[] SelectedYear { get; set; }
+
+        public SelectList SemsList { get; set; }
+        public string[] SelectedSem { get; set; }
     }
     public class Year
     {
         public string y { get; set; }
+    }
+    public class Sem
+    {
+        public string s { get; set; }
     }
 }

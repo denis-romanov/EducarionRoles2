@@ -21,25 +21,40 @@ namespace WebApplication1.Controllers
         // GET: /RaspManage/
         public ActionResult Index()
         {
-            RaspViewModel objectYearModel = new RaspViewModel();
-            objectYearModel.YearList = FillListsYears();
+            RaspViewModel objectListsModel = new RaspViewModel();
+            objectListsModel.YearList = FillListsYears();
+            //RaspViewModel objectSemModel = new RaspViewModel();
+            objectListsModel.SemsList = FillListSem();
             //RaspManage manageShedule = new RaspManage();
-            return View(objectYearModel);
+
+            return View(objectListsModel);
         }
 
         [HttpPost]
-        public ActionResult Index(RaspViewModel objectYearModel)
+        public ActionResult Index(RaspViewModel objListsModel)
         {
-            objectYearModel.YearList = FillListsYears();
+            objListsModel.YearList = FillListsYears();
             string selectedYear = "";
-            var yearListName = objectYearModel.YearList.Where(m => objectYearModel.SelectedYear.Contains(m.Value)).Select(m => m.Text);
+            var yearListName = objListsModel.YearList.Where(m => objListsModel.SelectedYear.Contains(m.Value)).Select(m => m.Text);
             foreach (var item in yearListName)
             {
-                selectedYear += item + ",";
+                selectedYear += item;
             }
-            ViewBag.Year = "Выбранный год " + selectedYear;
-            return View(objectYearModel);
-        }
+            ViewBag.Year = "Выбранный год: " + selectedYear;
+           
+
+            objListsModel.SemsList = FillListSem();
+            string selectedSem = "";
+            var semListName = objListsModel.SemsList.Where(m => objListsModel.SelectedSem.Contains(m.Value)).Select(m => m.Text);
+            foreach (var item in semListName)
+            {
+                selectedSem += item;
+            }
+            ViewBag.Sem = "Выбранный семестр: " + selectedSem;
+
+            return View(objListsModel);
+            
+        }       
 
         public SelectList FillListsYears()
         {
@@ -52,6 +67,17 @@ namespace WebApplication1.Controllers
             }
 
             SelectList objSelectList = new SelectList(objYear, "y", "y");
+            return objSelectList;
+        }
+
+        public SelectList FillListSem()
+        {
+            List<Sem> objSem = new List<Sem>();
+
+            objSem.Add(new Sem {s = "Осенний семестр" });
+            objSem.Add(new Sem {s = "Весенний семестр" });
+
+            SelectList objSelectList = new SelectList(objSem, "s", "s");
             return objSelectList;
         }
                

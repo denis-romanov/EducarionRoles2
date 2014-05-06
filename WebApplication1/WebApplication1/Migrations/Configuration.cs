@@ -18,6 +18,7 @@ namespace WebApplication1.Migrations
         protected override void Seed(WebApplication1.Models.ApplicationDbContext context)
         {
             this.AddUserAndRoles();
+            this.NewNot();
 
             //  This method will be called after migrating to the latest version.
 
@@ -88,5 +89,16 @@ namespace WebApplication1.Migrations
 
             return success;
         }
+
+        void NewNot()
+        {
+            var newNot = new Notifications();
+            {
+                newNot.ID = 1;
+                newNot.NotificationName = "Первое уведомление";
+                newNot.NotificationText = "Крутой текст";
+            }
+        }
+
     }
 }

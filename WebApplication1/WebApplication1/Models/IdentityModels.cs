@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace WebApplication1.Models
 {
@@ -24,7 +25,13 @@ namespace WebApplication1.Models
             : base("DefaultConnection")
         {
         }
+
+        //public System.Data.Entity.DbSet<WebApplication1.Models.Notifications> Notifications { get; set; }
+
+        public DbSet<Notifications> Notifications { get; set; }
+
     }
+
     public class IdentityManager
     {
         public bool RoleExists(string name)
